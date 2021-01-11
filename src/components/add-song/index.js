@@ -4,6 +4,10 @@ import { Button, Column, Divider, Flex, Heading, IconButton, Text, TextArea, Tex
 import _ from 'lodash';
 import { addSong, editSong, fetchSongDetails } from '../../actions/actions_song_details';
 
+function newDetails() {
+  return {lines: [], metadata: {song_name_kana: '', song_name_rom: '', song_name_en: '', link: '', notes: '', artist_id: 0}};
+}
+
 class AddSong extends Component {
   constructor(props) {
     super(props);
@@ -51,12 +55,8 @@ class AddSong extends Component {
     }
   }
 
-  newDetails() {
-    return {lines: [], metadata: {song_name_kana: '', song_name_rom: '', song_name_en: '', link: '', notes: '', artist_id: 0}};
-  }
-
   render() {
-    const state = _.isEmpty(this.props.song_details) ? this.newDetails() : this.props.song_details;
+    const state = _.isEmpty(this.props.song_details) ? newDetails() : this.props.song_details;
     return (
       <div>
         <Heading>Add/Edit Song</Heading>
@@ -177,6 +177,9 @@ class AddSong extends Component {
 }
 
 function mapStateToProps({ song_details }) {
+  if (_.isEmpty(song_details)) {
+    song_details = newDetails();
+  }
   return { song_details };
 }
 
