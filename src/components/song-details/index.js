@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Box, Column, Text } from 'gestalt';
+import { Box, ButtonGroup, Checkbox, Column, Divider, Heading, IconButton, Text } from 'gestalt';
 import _ from 'lodash';
 import { fetchSongDetails } from '../../actions/actions_song_details';
 
@@ -8,7 +8,12 @@ class SongDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      columnNames: ['kana', 'rom', 'en']
+      columnNames: {
+        en: true,
+        rom: true,
+        kana: true
+      },
+      isVertical: true
     };
   }
 
@@ -17,20 +22,30 @@ class SongDetails extends Component {
     this.props.fetchSongDetails(songId);
   }
 
-  drawRows(lines, columnNames) {
+  setLayout(isVertical) {
+    this.setState(prevState => ({ ...prevState, isVertical }));
+  }
+
+  toggleLang(lang) {
+    const { columnNames } = this.state;
+    columnNames[lang] = !columnNames[lang]
+    this.setState(prevState => ({ ...prevState, columnNames }));
+  }
+
+  drawColumns(lines, columnNames) {
     return (
       <Box>
-        {_.map(lines, line => (
+        {_.map(lines, (line, i) => (
           <Box 
             display="flex"
             direction="row"
             paddingY={2}
-            key={line}
+            key={`line${i}`}
           >
             {_.map(columnNames, col => (
               <Column 
                 span={12/columnNames.length}
-                key={col}
+                key={`${col}${i}`}
               >
                 {
                   _.map(_.split(line[col], '\n'), row => (
@@ -45,14 +60,101 @@ class SongDetails extends Component {
     );
   }
 
+  drawRows(lines, columnNames) {
+    return (
+      <Box>
+        {_.map(lines, (line, i) => (
+          <Box key={`line${i}`}>
+            {_.map(columnNames, col => (
+              <Box key={`${col}${i}`} paddingY={2}>
+                {_.map(_.split(line[col], '\n'), row => (
+                  <Text key={row}>{row}</Text>
+                ))}
+              </Box>
+            ))}
+          </Box>
+        ))}
+      </Box>
+    );
+  }
+
   render() {
     const { columnNames } = this.state;
     const { song_details } = this.props;
-    const lines = song_details.lines || null;
+    if (_.isEmpty(song_details)) {
+      return null;
+    }
+    const { lines, metadata } = song_details;
     return (
-      <Box>
-        {this.drawRows(lines, columnNames)}
-      </Box>
+      <div>
+        <Box paddingY={3}>
+          <Heading>{metadata.song_name_en}</Heading>
+          <Text>By {metadata.artist_name_rom}</Text>
+          <Text>{metadata.link}</Text>
+        </Box>
+        <Divider/>
+        <Box paddingY={3} display="flex">
+          <Box flex="grow">
+            <Heading size="md">Lyrics</Heading>
+          </Box>
+          <Box>
+            <Box display="flex" alignItems="center" marginBottom={1}>
+              <Box marginRight={2}>
+                <Text>Layout:</Text>
+              </Box>
+              <ButtonGroup>
+                <IconButton
+                  icon="pause"
+                  accessibilityLabel="vertical"
+                  selected={this.state.isVertical}
+                  size="sm"
+                  onClick={() => this.setLayout(true)}
+                />
+                <IconButton
+                  icon="menu"
+                  accessibilityLabel="horizontal"
+                  selected={!this.state.isVertical}
+                  size="sm"
+                  onClick={() => this.setLayout(false)}
+                />
+              </ButtonGroup>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Box marginRight={2}>
+                <Text>Display:</Text>
+              </Box>
+              <Box marginRight={2}>
+                <Checkbox
+                  label="Eng"
+                  id="en"
+                  checked={this.state.columnNames.en}
+                  onChange={() => this.toggleLang('en')}
+                />
+              </Box>
+              <Box marginRight={2}>
+                <Checkbox
+                  label="Rom"
+                  id="rom"
+                  checked={this.state.columnNames.rom}
+                  onChange={() => this.toggleLang('rom')}
+                />
+              </Box>
+              <Box marginRight={2}>
+                <Checkbox
+                  label="日本語"
+                  id="kana"
+                  checked={this.state.columnNames.kana}
+                  onChange={() => this.toggleLang('kana')}
+                />
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <Box paddingY={2}>
+          {this.state.isVertical && this.drawColumns(lines, _.filter(Object.keys(columnNames), k => columnNames[k]))}
+          {!this.state.isVertical && this.drawRows(lines, _.filter(Object.keys(columnNames), k => columnNames[k]))}
+        </Box>
+      </div>
     );
   }
 }
