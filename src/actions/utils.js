@@ -4,7 +4,7 @@ export function getConfig() {
   return {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `bearer ${localStorage.getItem('auth_token')}`
+      // 'Authorization': `bearer ${localStorage.getItem('auth_token')}`
     }
   }
 }
