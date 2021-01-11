@@ -34,7 +34,7 @@ class SongDetails extends Component {
 
   drawColumns(lines, columnNames) {
     return (
-      <Box>
+      <Box paddingX={2} paddingY={2}>
         {_.map(lines, (line, i) => (
           <Box 
             display="flex"
@@ -48,8 +48,8 @@ class SongDetails extends Component {
                 key={`${col}${i}`}
               >
                 {
-                  _.map(_.split(line[col], '\n'), row => (
-                    <Text key={row}>{row}</Text>
+                  _.map(_.split(line[col], '\n'), (row, j) => (
+                    <Text key={`${row}${i}${j}`}>{row}</Text>
                   ))
                 }
               </Column>
@@ -64,11 +64,11 @@ class SongDetails extends Component {
     return (
       <Box>
         {_.map(lines, (line, i) => (
-          <Box key={`line${i}`}>
+          <Box key={`line${i}`} paddingX={2} paddingY={2} borderStyle="shadow">
             {_.map(columnNames, col => (
               <Box key={`${col}${i}`} paddingY={2}>
-                {_.map(_.split(line[col], '\n'), row => (
-                  <Text key={row}>{row}</Text>
+                {_.map(_.split(line[col], '\n'), (row, j) => (
+                  <Text key={`${row}${i}${j}`}>{row}</Text>
                 ))}
               </Box>
             ))}
