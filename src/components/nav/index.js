@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text } from 'gestalt';
+import { Heading, Link } from 'gestalt';
 
 class Nav extends Component {
 
   render() {
     return (
-      <Text>nav bar</Text>
+      <Heading size="sm" color="blue"><Link href="/">Songs Homepage</Link></Heading>
     );
   }
 }

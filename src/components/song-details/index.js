@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Box, ButtonGroup, Checkbox, Column, Divider, Heading, IconButton, Text } from 'gestalt';
+import { Box, ButtonGroup, Checkbox, Column, Divider, Heading, Icon, IconButton, Link, Text } from 'gestalt';
 import _ from 'lodash';
 import { fetchSongDetails } from '../../actions/actions_song_details';
 
@@ -90,7 +90,7 @@ class SongDetails extends Component {
         <Box paddingY={3}>
           <Heading>{metadata.song_name_en}</Heading>
           <Text>By {metadata.artist_name_rom}</Text>
-          <Text>{metadata.link}</Text>
+          <Box display="flex"><Text color="blue"><Link href={metadata.link}>{metadata.link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
         </Box>
         <Divider/>
         <Box paddingY={3} display="flex">
