@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box, ButtonGroup, Checkbox, Column, Divider, Heading, Icon, IconButton, Link, Text } from 'gestalt';
 import _ from 'lodash';
+import { Helmet } from 'react-helmet';
 import { fetchSongDetails } from '../../actions/actions_song_details';
 
 class SongDetails extends Component {
@@ -49,7 +50,7 @@ class SongDetails extends Component {
               >
                 {
                   _.map(_.split(line[col], '\n'), (row, j) => (
-                    <Text key={`${row}${i}${j}`}>{row}</Text>
+                    <Text key={`${row}${i}${j}`} italic={col === 'rom'}>{row}</Text>
                   ))
                 }
               </Column>
@@ -68,7 +69,7 @@ class SongDetails extends Component {
             {_.map(columnNames, col => (
               <Box key={`${col}${i}`} paddingY={2}>
                 {_.map(_.split(line[col], '\n'), (row, j) => (
-                  <Text key={`${row}${i}${j}`}>{row}</Text>
+                  <Text key={`${row}${i}${j}`} italic={col === 'rom'}>{row}</Text>
                 ))}
               </Box>
             ))}
@@ -87,13 +88,17 @@ class SongDetails extends Component {
     const { lines, metadata } = song_details;
     return (
       <div>
+        <Helmet>
+          <title>{`${metadata.song_name_en} - ${metadata.artist_name_rom} lyrics translation`}</title>
+          <meta name="description" content={`${metadata.song_name_en} by ${metadata.artist_name_rom} lyric translation`}></meta>
+        </Helmet>
         <Box paddingY={3}>
           <Heading>{metadata.song_name_en}</Heading>
           <Text>By {metadata.artist_name_rom}</Text>
           <Box display="flex"><Text color="blue"><Link href={metadata.link}>{metadata.link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
         </Box>
         <Divider/>
-        <Box paddingY={3} display="flex">
+        <Box paddingY={3} display="flex" wrap={true}>
           <Box flex="grow">
             <Heading size="md">Lyrics</Heading>
           </Box>
