@@ -13,7 +13,7 @@ class Home extends Component {
     const { songs } = this.props;
     return (
       <div>
-        <Heading>Songs</Heading>
+        <Heading>All Translations</Heading>
         {
           _.map(songs, song => {
             const urlString = _.replace(`${song.song_name_en}-${song.artist_name_rom}`, / /g, '-');
