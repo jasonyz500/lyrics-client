@@ -15,7 +15,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/lyrics/add' component={AddSong}/>
-          <Route exact path='/lyrics/edit/:id' component={AddSong}/>
+          <Route exact path='/lyrics/:id/edit' component={AddSong}/>
           <Route path='/lyrics/:id' component={SongDetails}/>
           <Route path='/about' component={About}/>
         </Switch>

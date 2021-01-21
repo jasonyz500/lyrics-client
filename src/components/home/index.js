@@ -15,9 +15,16 @@ class Home extends Component {
       <div>
         <Heading>Songs</Heading>
         {
-          _.map(songs, song => (
-            <Text color="blue" key={song.song_name_en}><Link href={`/lyrics/${song.song_id}`}>{`${song.song_name_en} by ${song.artist_name_rom}`}</Link></Text>
-          ))
+          _.map(songs, song => {
+            const urlString = _.replace(`${song.song_name_en}-${song.artist_name_rom}`, / /g, '-');
+            return (
+              <Text color="blue" key={song.song_name_en}>
+                <Link href={`/lyrics/${song.song_id}/${urlString}`}>
+                  {`${song.song_name_en} by ${song.artist_name_rom}`}
+                </Link>
+              </Text>
+            );
+          })
         }
       </div>
     );

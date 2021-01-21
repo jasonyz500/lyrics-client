@@ -50,7 +50,7 @@ class SongDetails extends Component {
               >
                 {
                   _.map(_.split(line[col], '\n'), (row, j) => (
-                    <Text key={`${row}${i}${j}`} italic={col === 'rom'}>{row}</Text>
+                    <Text key={`${row}${i}${j}`} italic={col === 'rom'} overflow="normal">{row}</Text>
                   ))
                 }
               </Column>
