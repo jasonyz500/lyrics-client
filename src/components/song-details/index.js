@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import SongDetailsImpl from './song_details_impl.js';
+import SongDetailsImpl from './song_details_impl';
 
 const SongDetails = (props) => {
 	const params = useParams();
