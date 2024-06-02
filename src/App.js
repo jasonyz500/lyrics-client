@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <AddSong />
   },
   {
-    path: 'lyrics/:id',
+    path: 'lyrics/:id/:name?',
     element: <SongDetails />
   },
   {
