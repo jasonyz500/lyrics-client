@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Column, Divider, Flex, Heading, IconButton, Text, TextArea, TextField } from 'gestalt';
+import { Box, Button, Column, Divider, Flex, Heading, IconButton, Text, TextArea, TextField } from 'gestalt';
 import _ from 'lodash';
 import { addSong, editSong, fetchSongDetails } from '../../actions/actions_song_details';
 
@@ -61,83 +61,99 @@ class AddSongImpl extends Component {
       <div>
         <Heading>Add/Edit Song</Heading>
         <Divider/>
-        <Heading size="md">Metadata</Heading>
+        <Box marginTop={2}>
+          <Heading size="md">Metadata</Heading>
+        </Box>
         <Divider/>
-        <TextField
-          id="artist_id"
-          placeholder="Artist ID"
-          label="Artist ID"
-          value={state.metadata.artist_id.toString()}
-          onChange={({ value }) => this.editMetadata(value, 'artist_id')}
-        />
-        <TextField
-          id="song_name_kana"
-          placeholder="日本語曲名"
-          label="日本語曲名"
-          value={state.metadata.song_name_kana}
-          onChange={({ value }) => this.editMetadata(value, 'song_name_kana')}
-        />
-        <TextField
-          id="song_name_rom"
-          placeholder="Romaji song name"
-          label="Romaji song name"
-          value={state.metadata.song_name_rom}
-          onChange={({ value }) => this.editMetadata(value, 'song_name_rom')}
-        />
-        <TextField
-          id="song_name_en"
-          placeholder="English song name"
-          label="English song name"
-          value={state.metadata.song_name_en}
-          onChange={({ value }) => this.editMetadata(value, 'song_name_en')}
-        />
-        <TextField
-          id="youtube_link"
-          placeholder="https://www.youtube.com/watch?..."
-          label="Youtube link"
-          value={state.metadata.youtube_link}
-          onChange={({ value }) => this.editMetadata(value, 'youtube_link')}
-        />
-        <TextField
-          id="spotify_link"
-          placeholder=""
-          label="Spotify link"
-          value={state.metadata.spotify_link}
-          onChange={({ value }) => this.editMetadata(value, 'spotify_link')}
-        />
+        <Box paddingY={2}>
+          <TextField
+            id="artist_id"
+            placeholder="Artist ID"
+            label="Artist ID"
+            value={state.metadata.artist_id.toString()}
+            onChange={({ value }) => this.editMetadata(value, 'artist_id')}
+          />
+        </Box>
+        <Box paddingY={1}>
+          <TextField
+            id="song_name_kana"
+            placeholder="日本語曲名"
+            label="日本語曲名"
+            value={state.metadata.song_name_kana}
+            onChange={({ value }) => this.editMetadata(value, 'song_name_kana')}
+          />
+        </Box>
+        <Box paddingY={1}>
+          <TextField
+            id="song_name_rom"
+            placeholder="Romaji song name"
+            label="Romaji song name"
+            value={state.metadata.song_name_rom}
+            onChange={({ value }) => this.editMetadata(value, 'song_name_rom')}
+          />
+        </Box>
+        <Box paddingY={1}>
+          <TextField
+            id="song_name_en"
+            placeholder="English song name"
+            label="English song name"
+            value={state.metadata.song_name_en}
+            onChange={({ value }) => this.editMetadata(value, 'song_name_en')}
+          />
+        </Box>
+        <Box paddingY={1}>
+          <TextField
+            id="youtube_link"
+            placeholder="https://www.youtube.com/watch?..."
+            label="Youtube link"
+            value={state.metadata.youtube_link}
+            onChange={({ value }) => this.editMetadata(value, 'youtube_link')}
+          />
+        </Box>
+        <Box paddingY={1}>
+          <TextField
+            id="spotify_link"
+            placeholder="https://open.spotify.com/track/..."
+            label="Spotify link"
+            value={state.metadata.spotify_link}
+            onChange={({ value }) => this.editMetadata(value, 'spotify_link')}
+          />
+        </Box>
 
         <Heading size="md">Lines</Heading>
         <Divider/>
-        {_.map(state.lines, (line, i) => (
-          <Flex key={i}>
-            <Column span={1}>
-              <Text>Line {i+1}</Text>
-            </Column>
-            <Column span={11}>
-              <TextArea
-                id={`kana${i}`}
-                placeholder="日本語"
-                label="日本語"
-                value={state.lines[i].kana}
-                onChange={({ value }) => this.editLine(value, i, 'kana')}
-              />
-              <TextArea
-                id={`rom${i}`}
-                placeholder="Romaji"
-                label="Romaji"
-                value={state.lines[i].rom}
-                onChange={({ value }) => this.editLine(value, i, 'rom')}
-              />
-              <TextArea
-                id={`en${i}`}
-                placeholder="English"
-                label="English"
-                value={state.lines[i].en}
-                onChange={({ value }) => this.editLine(value, i, 'en')}
-              />
-            </Column>
-          </Flex>
-        ))}
+        <Box paddingY={2}>
+          {_.map(state.lines, (line, i) => (
+            <Flex key={i}>
+              <Column span={1}>
+                <Text>Line {i+1}</Text>
+              </Column>
+              <Column span={11}>
+                <Box paddingY={1}><TextArea
+                  id={`kana${i}`}
+                  placeholder="日本語"
+                  label="日本語"
+                  value={state.lines[i].kana}
+                  onChange={({ value }) => this.editLine(value, i, 'kana')}
+                /></Box>
+                <Box paddingY={1}><TextArea
+                  id={`rom${i}`}
+                  placeholder="Romaji"
+                  label="Romaji"
+                  value={state.lines[i].rom}
+                  onChange={({ value }) => this.editLine(value, i, 'rom')}
+                /></Box>
+                <Box paddingY={1}><TextArea
+                  id={`en${i}`}
+                  placeholder="English"
+                  label="English"
+                  value={state.lines[i].en}
+                  onChange={({ value }) => this.editLine(value, i, 'en')}
+                /></Box>
+              </Column>
+            </Flex>
+          ))}
+        </Box>
 
         <Flex>
           <IconButton
@@ -157,21 +173,25 @@ class AddSongImpl extends Component {
         </Flex>
 
         <Divider/>
-        <TextArea
-          id="link"
-          placeholder="Notes"
-          label="Notes"
-          value={state.metadata.notes}
-          onChange={({ value }) => this.editMetadata(value, 'notes')}
-        />
+        <Box paddingY={2}>
+          <TextArea
+            id="link"
+            placeholder="Notes"
+            label="Notes"
+            value={state.metadata.notes}
+            onChange={({ value }) => this.editMetadata(value, 'notes')}
+          />
+        </Box>
         <Divider/>
-        <TextField
-          id="secret"
-          placeholder="Top Secret!"
-          label="Top Secret!"
-          value={this.state.secret}
-          onChange={({ value }) => this.setState({ secret: value })}
-        />
+        <Box paddingY={2}>
+          <TextField
+            id="secret"
+            placeholder="Top Secret!"
+            label="Top Secret!"
+            value={this.state.secret}
+            onChange={({ value }) => this.setState({ secret: value })}
+          />
+        </Box>
         <Button
           type="submit"
           text="Save"

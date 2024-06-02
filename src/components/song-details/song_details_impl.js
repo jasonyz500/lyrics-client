@@ -97,8 +97,8 @@ class SongDetailsImpl extends Component {
         <Box paddingY={3}>
           <Heading>{metadata.song_name_en}</Heading>
           <Text>By {metadata.artist_name_rom}</Text>
-          <Box display="flex"><Text color="blue"><Link href={metadata.youtube_link}>{metadata.youtube_link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
-          <Box display="flex"><Text color="blue"><Link href={metadata.spotify_link}>{metadata.spotify_link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
+          {metadata.youtube_link && <Box display="flex"><Text color="blue"><Link href={metadata.youtube_link}>Listen on Youtube</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>}
+          {metadata.spotify_link && <Box display="flex"><Text color="blue"><Link href={metadata.spotify_link}>Listen on Spotify</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>}
         </Box>
         <Divider/>
         <Box paddingY={3} display="flex" wrap={true}>
@@ -162,6 +162,7 @@ class SongDetailsImpl extends Component {
           {this.state.isVertical && this.drawColumns(lines, _.filter(Object.keys(columnNames), k => columnNames[k]))}
           {!this.state.isVertical && this.drawRows(lines, _.filter(Object.keys(columnNames), k => columnNames[k]))}
         </Box>
+        {metadata.notes && <Box display="flex"><Text italic>Notes: {metadata.notes}</Text></Box>}
       </div>
     );
   }
