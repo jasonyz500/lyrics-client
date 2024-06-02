@@ -96,18 +96,18 @@ class SongDetailsImpl extends Component {
         </Helmet>
         <Box paddingY={3}>
           <Heading>{metadata.song_name_en}</Heading>
-          <Text>By {metadata.artist_name_rom}</Text>
-          {metadata.youtube_link && <Box display="flex"><Text color="blue"><Link href={metadata.youtube_link}>Listen on Youtube</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>}
-          {metadata.spotify_link && <Box display="flex"><Text color="blue"><Link href={metadata.spotify_link}>Listen on Spotify</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>}
+          <Box paddingY={1}><Text size={400}>By {metadata.artist_name_rom}</Text></Box>
+          {metadata.youtube_link && <Box display="flex"><Text color="shopping"><Link href={metadata.youtube_link}>Listen on Youtube</Link></Text><Icon accessibilityLabel="youtube_link" icon="service-youtube"/></Box>}
+          {metadata.spotify_link && <Box display="flex"><Text color="shopping"><Link href={metadata.spotify_link}>Listen on Spotify</Link></Text><Icon accessibilityLabel="spotify_link" icon="music-on"/></Box>}
         </Box>
         <Divider/>
         <Box paddingY={3} display="flex" wrap={true}>
           <Box flex="grow">
-            <Heading size="md">Lyrics</Heading>
+            <Heading>Lyrics</Heading>
           </Box>
           <Box>
             <Box display="flex" alignItems="center" marginBottom={1}>
-              <Box marginRight={2}>
+              <Box paddingX={2}>
                 <Text>Layout:</Text>
               </Box>
               <ButtonGroup>
@@ -128,26 +128,26 @@ class SongDetailsImpl extends Component {
               </ButtonGroup>
             </Box>
             <Box display="flex" alignItems="center">
-              <Box marginRight={2}>
+              <Box paddingX={2}>
                 <Text>Display:</Text>
               </Box>
-              <Box marginRight={2}>
+              <Box marginEnd={3}>
                 <Checkbox
-                  label="Eng"
+                  label="English"
                   id="en"
                   checked={this.state.columnNames.en}
                   onChange={() => this.toggleLang('en')}
                 />
               </Box>
-              <Box marginRight={2}>
+              <Box marginEnd={3}>
                 <Checkbox
-                  label="Rom"
+                  label="Romaji"
                   id="rom"
                   checked={this.state.columnNames.rom}
                   onChange={() => this.toggleLang('rom')}
                 />
               </Box>
-              <Box marginRight={2}>
+              <Box marginEnd={3}>
                 <Checkbox
                   label="日本語"
                   id="kana"

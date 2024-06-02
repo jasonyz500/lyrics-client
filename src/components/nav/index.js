@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { Box, Heading, Link } from 'gestalt';
+import { Box, Divider, Heading, Link } from 'gestalt';
 
 class Nav extends Component {
 
   render() {
     return (
+      <div>
       <Box display="flex">
         <Box flex="grow">
-          <Link href="/"><Heading size="sm">Home</Heading></Link>
+          <Link href="/"><Heading color="shopping">Home</Heading></Link>
         </Box>
         <Box>
-          <Heading size="sm" color="blue"><Link href="/about">About</Link></Heading>
+          <Heading color="shopping"><Link href="/about">About</Link></Heading>
         </Box>
       </Box>
+      <Divider />
+      </div>
     );
   }
 }

@@ -18,7 +18,7 @@ class Home extends Component {
           _.map(songs, song => {
             const urlString = _.replace(`${song.song_name_en}-${song.artist_name_rom}`, / /g, '-');
             return (
-              <Text color="blue" key={song.song_name_en}>
+              <Text color="shopping" key={song.song_name_en}>
                 <Link href={`/lyrics/${song.song_id}/${urlString}`}>
                   {`${song.song_name_en} by ${song.artist_name_rom}`}
                 </Link>
