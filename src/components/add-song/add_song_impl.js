@@ -98,6 +98,13 @@ class AddSongImpl extends Component {
           value={state.metadata.youtube_link}
           onChange={({ value }) => this.editMetadata(value, 'youtube_link')}
         />
+        <TextField
+          id="spotify_link"
+          placeholder=""
+          label="Spotify link"
+          value={state.metadata.spotify_link}
+          onChange={({ value }) => this.editMetadata(value, 'spotify_link')}
+        />
 
         <Heading size="md">Lines</Heading>
         <Divider/>
