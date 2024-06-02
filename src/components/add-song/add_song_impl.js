@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { addSong, editSong, fetchSongDetails } from '../../actions/actions_song_details';
 
 function newDetails() {
-  return {lines: [], metadata: {song_name_kana: '', song_name_rom: '', song_name_en: '', link: '', notes: '', artist_id: 0}};
+  return {lines: [], metadata: {song_name_kana: '', song_name_rom: '', song_name_en: '', youtube_link: '', spotify_link: '', notes: '', artist_id: 0}};
 }
 
 class AddSongImpl extends Component {
@@ -92,11 +92,11 @@ class AddSongImpl extends Component {
           onChange={({ value }) => this.editMetadata(value, 'song_name_en')}
         />
         <TextField
-          id="link"
+          id="youtube_link"
           placeholder="https://www.youtube.com/watch?..."
-          label="Link"
-          value={state.metadata.link}
-          onChange={({ value }) => this.editMetadata(value, 'link')}
+          label="Youtube link"
+          value={state.metadata.youtube_link}
+          onChange={({ value }) => this.editMetadata(value, 'youtube_link')}
         />
 
         <Heading size="md">Lines</Heading>

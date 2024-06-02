@@ -95,7 +95,8 @@ class SongDetailsImpl extends Component {
         <Box paddingY={3}>
           <Heading>{metadata.song_name_en}</Heading>
           <Text>By {metadata.artist_name_rom}</Text>
-          <Box display="flex"><Text color="blue"><Link href={metadata.link}>{metadata.link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
+          <Box display="flex"><Text color="blue"><Link href={metadata.youtube_link}>{metadata.link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
+          <Box display="flex"><Text color="blue"><Link href={metadata.spotify_link}>{metadata.link}</Link></Text><Icon accessibilityLabel="link" icon="link"/></Box>
         </Box>
         <Divider/>
         <Box paddingY={3} display="flex" wrap={true}>

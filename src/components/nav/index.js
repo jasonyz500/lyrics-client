@@ -7,7 +7,7 @@ class Nav extends Component {
     return (
       <Box display="flex">
         <Box flex="grow">
-          <Heading size="sm" color="blue"><Link href="/">Home</Link></Heading>
+          <Link href="/"><Heading size="sm">Home</Heading></Link>
         </Box>
         <Box>
           <Heading size="sm" color="blue"><Link href="/about">About</Link></Heading>
